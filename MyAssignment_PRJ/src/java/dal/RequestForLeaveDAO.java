@@ -63,39 +63,30 @@ public class RequestForLeaveDAO extends DBContext {
         return null; // Admin tạo đơn hoặc không tìm thấy người duyệt
     }
 
-    public List<RequestForLeave> getRequestsCreatedBy(int creatorEid) {
-        List<RequestForLeave> list = new ArrayList<>();
-        String sql = """
-        SELECT r.id, r.title, r.[from], r.[to], r.reason, r.status,
-               r.createdby, r.processedby,
-               e.fullname AS processedby_name
-        FROM RequestForLeave r
-        LEFT JOIN Employee e ON r.processedby = e.eid
-        WHERE r.createdby = ?
-        ORDER BY r.[from] DESC
-    """;
+    public List<RequestForLeave> getRequestsByEid(int eid) {
+    List<RequestForLeave> list = new ArrayList<>();
+    String sql = "SELECT * FROM RequestForLeave WHERE createdby = ?";
 
-        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
-            ps.setInt(1, creatorEid);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                RequestForLeave r = new RequestForLeave();
-                r.setRid(rs.getInt("rid"));
-                r.setTitle(rs.getString("title"));
-                r.setFrom(rs.getDate("from"));
-                r.setTo(rs.getDate("to"));
-                r.setReason(rs.getString("reason"));
-                r.setStatus(rs.getInt("status"));
-                r.setCreatedBy(rs.getInt("createdby"));
-                r.setProcessedBy(rs.getObject("processedby") != null ? rs.getInt("processedby") : null);
-                r.setProcessedByName(rs.getString("processedby_name")); // 💡 new
-                list.add(r);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+        ps.setInt(1, eid);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            RequestForLeave r = new RequestForLeave();
+            r.setRid(rs.getInt("rid"));
+            r.setTitle(rs.getString("title"));
+            r.setFrom(rs.getDate("from"));
+            r.setTo(rs.getDate("to"));
+            r.setReason(rs.getString("reason"));
+            r.setStatus(rs.getInt("status"));
+            r.setCreatedBy(rs.getInt("createdby"));
+            r.setProcessedBy(rs.getInt("processedby"));
+            list.add(r);
         }
-
-        return list;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return list;
+}
+
 
 }

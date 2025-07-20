@@ -9,24 +9,22 @@ import java.util.List;
 import model.Account;
 import model.RequestForLeave;
 
-@WebServlet(name = "MyLeaveRequestServlet", urlPatterns = {"/my-leave-requests"})
+@WebServlet(name = "MyLeaveRequestServlet", urlPatterns = {"/my-leave-request"})
 public class MyLeaveRequestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        Account acc = (Account) session.getAttribute("account");
+        Account acc = (Account) session.getAttribute("user");
 
-        if (acc == null) {
+        if (acc == null || acc.getEid() == -1) {
             response.sendRedirect("login.jsp");
             return;
         }
 
-        RequestForLeaveDAO dao = new RequestForLeaveDAO();
-        List<RequestForLeave> myRequests = dao.getRequestsCreatedBy(acc.getEid());
-
+        List<RequestForLeave> myRequests = new RequestForLeaveDAO().getRequestsByEid(acc.getEid());
         request.setAttribute("myRequests", myRequests);
-        request.getRequestDispatcher("my-leave-requests.jsp").forward(request, response);
+        request.getRequestDispatcher("my-leave-request.jsp").forward(request, response);
     }
 }

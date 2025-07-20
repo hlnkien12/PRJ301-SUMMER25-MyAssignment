@@ -1,0 +1,67 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f5f9;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    padding: 20px;
+    color: #333;
+}
+
+.table-container {
+    max-width: 90%;
+    margin: 30px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #004b8d;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.status-approved {
+    color: green;
+    font-weight: bold;
+}
+
+.status-rejected {
+    color: red;
+    font-weight: bold;
+}
+
+.status-processing {
+    color: orange;
+    font-weight: bold;
+}
+
+.back-home {
+    display: block;
+    text-align: center;
+    margin: 20px 0;
+    text-decoration: none;
+    color: #004b8d;
+    font-weight: bold;
+}

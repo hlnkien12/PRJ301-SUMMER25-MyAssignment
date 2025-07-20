@@ -22,7 +22,7 @@
             <li><a href="Create-Leave-Request.jsp">📝 Create Leave Request</a></li>
             <li><a href="/rfl/subordinates">📁 View Subordinate Leave Requests</a></li>
             <li><a href="/rfl/approve">✅ Approve Leave Request</a></li>
-            <li><a href="my-leave-requests">📂 View My Leave Requests</a></li>
+            <li><a href="my-leave-request">📂 View My Leave Requests</a></li>
             <li><a href="/employee/manage">👥 Manage Employees</a></li>
             <li><a href="/department/staffs">🏢 View Department Staff</a></li>
             <li><a href="/rfl/history">📜 View Leave Approval History</a></li>
