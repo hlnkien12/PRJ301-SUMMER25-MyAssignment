@@ -21,7 +21,7 @@
             <li><a href="/dashboard">📊 View Dashboard</a></li>
             <li><a href="Create-Leave-Request.jsp">📝 Create Leave Request</a></li>
             <li><a href="view-subordinate-requests">📁 View Subordinate Leave Requests</a></li>
-            <li><a href="approve-request">✅ Approve Leave Request</a></li>
+            <li><a href="approve-request.jsp">✅ Approve Leave Request</a></li>
             <li><a href="my-leave-request">📂 View My Leave Requests</a></li>
             <li><a href="/employee/manage">👥 Manage Employees</a></li>
             <li><a href="/department/staffs">🏢 View Department Staff</a></li>
