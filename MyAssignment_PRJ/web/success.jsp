@@ -19,7 +19,7 @@
         <h2>🎉 The leave application has been successfully submitted!</h2>
         <p>Please wait for approval within 24 hours after submission!</p>
         <p>
-            <a href="home-<%= ((Role)session.getAttribute("role")).getRname().toLowerCase().replace(" ", "-") %>.jsp">
+            <a href="home-<%= ((Role)session.getAttribute("role")).getRname().toLowerCase().replace(" ", "") %>.jsp">
                 ← Back to home page
             </a>
         </p>
