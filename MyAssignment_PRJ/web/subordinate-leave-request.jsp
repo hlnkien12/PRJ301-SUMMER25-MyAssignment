@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>Subordinate Leave Requests</title>
-    <link rel="stylesheet" href="CSS/request-table.css">
+    <link rel="stylesheet" href="CSS/subordinate-requests.css">
 </head>
 <body>
     <h2>📁 Subordinate Leave Requests</h2>
@@ -46,6 +46,6 @@
             </tr>
         <% } %>
     </table>
-    <a href="home-<%= session.getAttribute("role") != null ? ((model.Role)session.getAttribute("role")).getRname().toLowerCase().replace(" ", "") : "hod" %>.jsp">← Back</a>
+    <a href="home-<%= ((model.Role)session.getAttribute("role")).getRname().toLowerCase().replace(" ", "") %>.jsp">← Back</a>
 </body>
 </html>
