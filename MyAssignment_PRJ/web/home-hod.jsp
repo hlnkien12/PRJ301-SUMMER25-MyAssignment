@@ -1,0 +1,36 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="model.Account" %>
+<%
+    Account acc = (Account) session.getAttribute("user");
+    if (acc == null) {
+        response.sendRedirect("login.html");
+        return;
+    }
+%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Head of Department</title>
+    <link rel="stylesheet" href="CSS/home.css">
+</head>
+<body>
+    <div class="header">🏢 Head of Department - <%= acc.getDisplayname() %></div>
+    <div class="container">
+        <h2>Features:</h2>
+        <ul>
+            <li><a href="/dashboard">📊 View Dashboard</a></li>
+            <li><a href="/rfl/create">📝 Create Leave Request</a></li>
+            <li><a href="/rfl/subordinates">📁 View Subordinate Leave Requests</a></li>
+            <li><a href="/rfl/approve">✅ Approve Leave Request</a></li>
+            <li><a href="/rfl/self">📂 View My Leave Requests</a></li>
+            <li><a href="/employee/manage">👥 Manage Employees</a></li>
+            <li><a href="/department/staffs">🏢 View Department Staff</a></li>
+            <li><a href="/rfl/history">📜 View Leave Approval History</a></li>
+            <li><a href="/rfl/balance">📅 View Leave Balance</a></li>
+        </ul>
+        <div class="logout">
+            <a href="logout">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
