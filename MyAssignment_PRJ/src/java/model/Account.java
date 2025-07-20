@@ -2,6 +2,7 @@ package model;
 
 public class Account {
 
+    private String roleName;
     private int aid;
     private String username;
     private String password;
@@ -56,5 +57,13 @@ public class Account {
 
     public void setEid(int eid) {
         this.eid = eid;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

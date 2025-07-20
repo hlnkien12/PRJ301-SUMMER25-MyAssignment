@@ -3,6 +3,7 @@ package model;
 import java.sql.Date;
 
 public class RequestForLeave {
+
     private int rid;
     private String title;
     private Date from;
@@ -11,9 +12,9 @@ public class RequestForLeave {
     private int status;
     private int createdBy;
     private Integer processedBy; // có thể null
+    private String processedByName;
 
     // Getters và Setters
-
     public int getRid() {
         return rid;
     }
@@ -77,5 +78,12 @@ public class RequestForLeave {
     public void setProcessedBy(Integer processedBy) {
         this.processedBy = processedBy;
     }
-    
+
+    public String getProcessedByName() {
+        return processedByName;
+    }
+
+    public void setProcessedByName(String processedByName) {
+        this.processedByName = processedByName;
+    }
 }
