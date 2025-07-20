@@ -1,0 +1,85 @@
+/* Nền tổng thể */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #007bff, #00bfff); /* nền chuyển màu xanh dương đậm -> nhạt */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hộp login */
+.login-container {
+    background-color: white /* nền trắng rõ ràng */;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 360px;
+}
+
+/* Tiêu đề */
+.login-container h2 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 24px;
+}
+
+/* Label */
+.login-container label {
+    display: block;
+    margin-bottom: 6px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Input text */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    transition: border 0.3s;
+}
+
+/* Focus khi gõ vào input */
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Nút Login */
+.login-container input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover nút login */
+.login-container input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/*Erron-message*/
+.error-message {
+    color: red;
+    background-color: #ffe6e6;
+    border: 1px solid red;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
