@@ -19,7 +19,7 @@
             <h2>Employee Actions:</h2>
             <ul>
                 <li><a href="/dashboard">📊 View Dashboard</a></li>
-                <li><a href="/rfl/create">📝 Create Leave Request</a></li>
+                <li><a href="Create-Leave-Request.jsp">📝 Create Leave Request</a></li>
                 <li><a href="/rfl/self">📂 View My Leave Requests</a></li>
                 <li><a href="/rfl/balance">📅 View Leave Balance</a></li>
             </ul>

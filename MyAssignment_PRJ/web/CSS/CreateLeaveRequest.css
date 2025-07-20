@@ -1,41 +1,42 @@
 body {
-    font-family: "Segoe UI", sans-serif;
-    background-color: #f4f6f9;
+    font-family: Arial, sans-serif;
+    background-color: #f6f8fa;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
-.container {
-    width: 450px;
-    margin: 80px auto;
-    padding: 30px;
+.form-container {
     background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
+    padding: 30px;
+    border-radius: 10px;
+    width: 500px;
+    margin-top: 40px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
     text-align: center;
-    margin-bottom: 30px;
-    color: #333;
+    margin-bottom: 25px;
 }
 
 label {
     display: block;
-    margin-top: 15px;
-    font-weight: 500;
-    color: #444;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 input[type="text"],
 input[type="date"],
 textarea {
     width: 100%;
-    padding: 10px;
-    margin-top: 6px;
+    padding: 8px;
+    border-radius: 5px;
     border: 1px solid #ccc;
-    border-radius: 6px;
     box-sizing: border-box;
+    margin-bottom: 15px;
 }
 
 textarea {
@@ -43,17 +44,28 @@ textarea {
 }
 
 button {
-    margin-top: 25px;
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     background-color: #28a745;
-    color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 button:hover {
     background-color: #218838;
+}
+
+a {
+    display: block;
+    margin-top: 15px;
+    text-align: left;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
