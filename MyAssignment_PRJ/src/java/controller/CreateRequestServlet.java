@@ -17,6 +17,7 @@ import model.RequestForLeave;
 import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.Date;
+
 /**
  *
  * @author Admin
@@ -43,7 +44,7 @@ public class CreateRequestServlet extends HttpServlet {
             String reason = request.getParameter("reason");
 
             // Lấy eid từ class account trong package model:
-            int eid = acc.getEid(); 
+            int eid = acc.getEid();
 
             RequestForLeave rfl = new RequestForLeave();
             rfl.setTitle(title);
@@ -57,12 +58,13 @@ public class CreateRequestServlet extends HttpServlet {
             if (success) {
                 response.sendRedirect("success.jsp");
             } else {
-                response.sendRedirect("Create-Leave-Requset.jsp?error=1");
+                response.sendRedirect("Create-Leave-Request.jsp?error=1");
+
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("Create-Leave-Requset.jsp?error=exception");
+            response.sendRedirect("Create-Leave-Request.jsp?error=exception");
         }
     }
 }
