@@ -6,8 +6,8 @@ import model.RequestForLeave;
 public class RequestForLeaveDAO extends DBContext {
 
     public boolean insert(RequestForLeave rfl) {
-        String sql = "INSERT INTO RequestForLeave (title, [from], [to], reason, status, createdby, processedby) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, NULL)";
+        String sql = "INSERT INTO RequestForLeave (title, [from], [to], reason, status, createdby, processedby) "
+                + "VALUES (?, ?, ?, ?, ?, ?, NULL)";
 
         try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
             ps.setString(1, rfl.getTitle());
@@ -18,7 +18,8 @@ public class RequestForLeaveDAO extends DBContext {
             ps.setInt(6, rfl.getCreatedBy());
 
             return ps.executeUpdate() > 0;
-        } catch (SQLException | Exception e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

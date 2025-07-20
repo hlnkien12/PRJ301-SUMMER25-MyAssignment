@@ -32,7 +32,7 @@ public class CreateRequestServlet extends HttpServlet {
         Account acc = (Account) session.getAttribute("user");
 
         if (acc == null) {
-            response.sendRedirect("login.html");
+            response.sendRedirect("login.jsp");
             return;
         }
 
@@ -57,12 +57,12 @@ public class CreateRequestServlet extends HttpServlet {
             if (success) {
                 response.sendRedirect("success.jsp");
             } else {
-                response.sendRedirect("create-rfl.jsp?error=1");
+                response.sendRedirect("Create-Leave-Requset.jsp?error=1");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("create-rfl.jsp?error=exception");
+            response.sendRedirect("Create-Leave-Requset.jsp?error=exception");
         }
     }
 }

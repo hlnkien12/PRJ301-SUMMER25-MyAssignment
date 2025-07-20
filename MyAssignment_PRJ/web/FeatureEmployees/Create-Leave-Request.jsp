@@ -6,7 +6,7 @@
     Role role = (Role) session.getAttribute("role");
 
     if (acc == null || role == null) {
-    response.sendRedirect("../login.html");
+    response.sendRedirect("../login.jsp");
     return;
 }
 
@@ -21,7 +21,7 @@
 <body>
     <div class="form-container">
         <h2>Create Leave Request</h2>
-        <form action="create-request" method="post">
+        <form action="create-request-for-leave" method="post">
             <label>Title:</label>
             <input type="text" name="title" required><br>
 
