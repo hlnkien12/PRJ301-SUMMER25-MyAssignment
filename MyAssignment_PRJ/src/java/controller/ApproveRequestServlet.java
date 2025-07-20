@@ -22,12 +22,13 @@ import java.io.IOException;
 
 import dal.RequestForLeaveDAO;
 import model.Account;
+
 /**
  *
  * @author Admin
  */
 @WebServlet(name = "ApproveRequesrServlet", urlPatterns = {"/approve-request"})
-public class ApproveRequesrServlet extends HttpServlet {
+public class ApproveRequestServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -41,16 +42,28 @@ public class ApproveRequesrServlet extends HttpServlet {
             return;
         }
 
-        int rid = Integer.parseInt(request.getParameter("rid"));
-        int action = Integer.parseInt(request.getParameter("action")); // 1: approve, 2: reject
+        try {
+            int rid = Integer.parseInt(request.getParameter("rid"));
+            int action = Integer.parseInt(request.getParameter("action")); // 1: approve, 2: reject
+            int approverEid = acc.getEid();
 
-        RequestForLeaveDAO dao = new RequestForLeaveDAO();
-        boolean success = dao.updateStatus(rid, action, acc.getEid());
+            boolean success = new RequestForLeaveDAO().updateStatus(rid, action, approverEid);
 
-        if (success) {
-            response.sendRedirect("view-subordinate-requests");
-        } else {
+            if (success) {
+                response.sendRedirect("view-subordinate-requests");
+            } else {
+                response.sendRedirect("error.jsp");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
             response.sendRedirect("error.jsp");
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.sendRedirect("login.jsp"); // hoặc 404 nếu muốn chặn GET
     }
 }
