@@ -14,7 +14,7 @@
     switch (role.getRname().toLowerCase()) {
         case "employee": backUrl = "home-employee.jsp"; break;
         case "leader": backUrl = "home-leader.jsp"; break;
-        case "head of department": backUrl = "home-hod.jsp"; break;
+        case "head of department": backUrl = "home-headofdepartment.jsp"; break;
         case "admin": backUrl = "home-admin.jsp"; break;
     }
 %>

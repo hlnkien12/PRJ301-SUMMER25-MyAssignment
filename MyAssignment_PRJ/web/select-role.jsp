@@ -4,7 +4,7 @@
 <%
     List<Role> roles = (List<Role>) session.getAttribute("roles");
     if (roles == null || roles.isEmpty()) {
-        response.sendRedirect("login.html");
+        response.sendRedirect("login.jsp");
         return;
     }
 %>

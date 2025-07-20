@@ -8,41 +8,39 @@
         response.sendRedirect("login.jsp");
         return;
     }
-
-    String backUrl = "home.jsp";
-    switch (role.getRname().toLowerCase()) {
-        case "employee": backUrl = "home-employee.jsp"; break;
-        case "leader": backUrl = "home-leader.jsp"; break;
-        case "head of department": backUrl = "home-hod.jsp"; break;
-        case "admin": backUrl = "home-admin.jsp"; break;
+    String backUrl = "login.jsp";
+    if (role != null) {
+        String roleName = role.getRname().toLowerCase().replaceAll(" ", "");
+        backUrl = "home-" + roleName + ".jsp";
     }
+
 %>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Create Leave Request</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/CreateLeaveRequest.css">
-</head>
-<body>
-    <div class="form-container">
-        <h2>Create Leave Request</h2>
-        <form action="<%= request.getContextPath() %>/create-request-for-leave" method="post">
-            <label>Title:</label>
-            <input type="text" name="title" required><br>
+    <head>
+        <meta charset="UTF-8">
+        <title>Create Leave Request</title>
+        <link rel="stylesheet" href="<%= request.getContextPath() %>/CSS/CreateLeaveRequest.css">
+    </head>
+    <body>
+        <div class="form-container">
+            <h2>Create Leave Request</h2>
+            <form action="<%= request.getContextPath() %>/create-request-for-leave" method="post">
+                <label>Title:</label>
+                <input type="text" name="title" required><br>
 
-            <label>From Date:</label>
-            <input type="date" name="from" required><br>
+                <label>From Date:</label>
+                <input type="date" name="from" required><br>
 
-            <label>To Date:</label>
-            <input type="date" name="to" required><br>
+                <label>To Date:</label>
+                <input type="date" name="to" required><br>
 
-            <label>Reason:</label>
-            <textarea name="reason" rows="4" required></textarea><br>
+                <label>Reason:</label>
+                <textarea name="reason" rows="4" required></textarea><br>
 
-            <button type="submit">Submit Request</button>
-        </form>
-        <a href="<%= backUrl %>">← Back to Home</a>
-    </div>
-</body>
+                <button type="submit">Submit Request</button>
+            </form>
+            <a href="<%= backUrl %>">← Back to Home</a>
+        </div>
+    </body>
 </html>
