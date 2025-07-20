@@ -20,7 +20,7 @@
         <ul>
             <li><a href="/dashboard">📊 View Dashboard</a></li>
             <li><a href="Create-Leave-Request.jsp">📝 Create Leave Request</a></li>
-            <li><a href="/rfl/subordinates">📁 View Subordinate Leave Requests</a></li>
+            <li><a href="view-subordinate-requests">📁 View Subordinate Leave Requests</a></li>
             <li><a href="/rfl/approve">✅ Approve Leave Request</a></li>
             <li><a href="my-leave-request">📂 View My Leave Requests</a></li>
             <li><a href="/employee/manage">👥 Manage Employees</a></li>
