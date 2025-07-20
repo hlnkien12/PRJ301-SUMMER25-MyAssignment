@@ -16,11 +16,11 @@
 </head>
 <body>
     <div class="message-box">
-        <h2>🎉 Đơn xin nghỉ đã được gửi thành công!</h2>
-        <p>Chúng tôi sẽ xử lý yêu cầu của bạn sớm nhất có thể.</p>
+        <h2>🎉 The leave application has been successfully submitted!</h2>
+        <p>Please Wait!</p>
         <p>
             <a href="home-<%= ((Role)session.getAttribute("role")).getRname().toLowerCase().replace(" ", "-") %>.jsp">
-                ← Quay lại trang chủ
+                ← Back to home page
             </a>
         </p>
     </div>
