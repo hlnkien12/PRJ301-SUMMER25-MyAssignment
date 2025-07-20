@@ -171,4 +171,25 @@ public class RequestForLeaveDAO extends DBContext {
         return list;
     }
 
+    /**
+     * Cập nhật trạng thái của một đơn xin nghỉ phép.
+     *
+     * @param rid ID của đơn nghỉ phép.
+     * @param status Trạng thái cập nhật: 1 = Approved, 2 = Rejected.
+     * @param approverEid ID của người xét duyệt (Leader, HOD, Admin).
+     * @return true nếu cập nhật thành công, false nếu có lỗi.
+     */
+    public boolean updateStatus(int rid, int status, int approverEid) {
+        String sql = "UPDATE RequestForLeave SET status = ?, processedby = ? WHERE rid = ?";
+        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+            ps.setInt(1, status);           // Trạng thái: 1 (duyệt), 2 (từ chối)
+            ps.setInt(2, approverEid);      // Người xử lý đơn
+            ps.setInt(3, rid);              // ID của đơn nghỉ phép
+            return ps.executeUpdate() > 0;  // Trả về true nếu có ít nhất 1 dòng bị ảnh hưởng
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;                   // Trả về false nếu xảy ra lỗi
+        }
+    }
+
 }
