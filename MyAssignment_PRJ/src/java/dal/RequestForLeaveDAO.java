@@ -202,4 +202,54 @@ public class RequestForLeaveDAO extends DBContext {
     List<RequestForLeave> list = new ArrayList<>();
     String sql = "";
 
-    
+    if ("Leader".equalsIgnoreCase(role)) {
+        sql = """
+            SELECT r.* FROM RequestForLeave r
+            JOIN Employee e ON r.createdby = e.eid
+            WHERE e.groupid = (
+                SELECT groupid FROM Employee WHERE eid = ?
+            )
+            AND r.createdby != ?
+            AND r.status = 0
+        """;
+    } else if ("Head of Department".equalsIgnoreCase(role)) {
+        sql = """
+            SELECT r.* FROM RequestForLeave r
+            JOIN Employee e ON r.createdby = e.eid
+            WHERE e.did = (
+                SELECT did FROM Employee WHERE eid = ?
+            )
+            AND r.createdby != ?
+            AND r.status = 0
+        """;
+    } else if ("Admin".equalsIgnoreCase(role)) {
+        sql = "SELECT * FROM RequestForLeave WHERE status = 0";
+    }
+
+    try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+        if (!"Admin".equalsIgnoreCase(role)) {
+            ps.setInt(1, eid);
+            ps.setInt(2, eid);
+        }
+
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            RequestForLeave r = new RequestForLeave();
+            r.setRid(rs.getInt("rid"));
+            r.setTitle(rs.getString("title"));
+            r.setFrom(rs.getDate("from"));
+            r.setTo(rs.getDate("to"));
+            r.setReason(rs.getString("reason"));
+            r.setStatus(rs.getInt("status"));
+            r.setCreatedBy(rs.getInt("createdby"));
+            r.setProcessedBy(rs.getInt("processedby"));
+            list.add(r);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return list;
+}
+
+}
