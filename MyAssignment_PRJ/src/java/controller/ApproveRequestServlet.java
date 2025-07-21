@@ -21,7 +21,10 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import dal.RequestForLeaveDAO;
+import java.util.List;
 import model.Account;
+import model.RequestForLeave;
+import model.Role;
 
 /**
  *
@@ -29,41 +32,24 @@ import model.Account;
  */
 @WebServlet(name = "ApproveRequesrServlet", urlPatterns = {"/approve-request"})
 public class ApproveRequestServlet extends HttpServlet {
-
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
 
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("user");
+        Role role = (Role) session.getAttribute("role");
 
-        if (acc == null) {
+        if (acc == null || role == null) {
             response.sendRedirect("login.jsp");
             return;
         }
 
-        try {
-            int rid = Integer.parseInt(request.getParameter("rid"));
-            int action = Integer.parseInt(request.getParameter("action")); // 1: approve, 2: reject
-            int approverEid = acc.getEid();
+        List<RequestForLeave> pendingList = new RequestForLeaveDAO()
+            .getPendingRequestsForApproval(acc.getEid(), role.getRname());
 
-            boolean success = new RequestForLeaveDAO().updateStatus(rid, action, approverEid);
-
-            if (success) {
-                response.sendRedirect("view-subordinate-requests");
-            } else {
-                response.sendRedirect("error.jsp");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("error.jsp");
-        }
+        request.setAttribute("pendingRequests", pendingList);
+        request.getRequestDispatcher("approve-request.jsp").forward(request, response);
     }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.sendRedirect("login.jsp"); // hoặc 404 nếu muốn chặn GET
-    }
+    
 }

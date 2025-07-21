@@ -192,4 +192,13 @@ public class RequestForLeaveDAO extends DBContext {
         }
     }
 
+    /**
+     * Hàm này chỉ trả về các đơn có status = 0 (chờ duyệt).
+     *
+     * @param eid
+     * @param role
+     * @return
+     */
+    
+
 }
