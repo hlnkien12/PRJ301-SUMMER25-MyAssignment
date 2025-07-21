@@ -4,15 +4,7 @@ import java.sql.Date;
 
 public class RequestForLeave {
 
-    private int rid;
-    private String title;
-    private Date from;
-    private Date to;
-    private String reason;
-    private int status;
-    private int createdBy;
-    private Integer processedBy; // có thể null
-    private String processedByName;
+    
 
     // Getters và Setters
     public int getRid() {
