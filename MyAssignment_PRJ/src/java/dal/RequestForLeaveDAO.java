@@ -191,52 +191,65 @@ public class RequestForLeaveDAO extends DBContext {
             return false;                   // Trả về false nếu xảy ra lỗi
         }
     }
-
+    
     /**
      * Hàm này chỉ trả về các đơn có status = 0 (chờ duyệt).
-     *
      * @param eid
      * @param role
-     * @return
+     * @return 
      */
     public List<RequestForLeave> getPendingRequestsForApproval(int eid, String role) {
-        List<RequestForLeave> list = new ArrayList<>();
-        String sql = "";
+    List<RequestForLeave> list = new ArrayList<>();
+    String sql = "";
 
-        // Với Leader và HOD: duyệt đơn của nhân viên cấp dưới trực tiếp
-        if ("Leader".equalsIgnoreCase(role) || "Head of Department".equalsIgnoreCase(role)) {
-            sql = """
+    if ("Leader".equalsIgnoreCase(role)) {
+        sql = """
             SELECT r.* FROM RequestForLeave r
             JOIN Employee e ON r.createdby = e.eid
-            WHERE e.bossid = ? AND r.status = 0
+            WHERE e.groupid = (
+                SELECT groupid FROM Employee WHERE eid = ?
+            )
+            AND r.createdby != ?
+            AND r.status = 0
         """;
-        } else if ("Admin".equalsIgnoreCase(role)) {
-            sql = "SELECT * FROM RequestForLeave WHERE status = 0";
-        }
-
-        try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
-            if (!"Admin".equalsIgnoreCase(role)) {
-                ps.setInt(1, eid); // eid của người đang đăng nhập (Leader hoặc HOD)
-            }
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                RequestForLeave r = new RequestForLeave();
-                r.setRid(rs.getInt("rid"));
-                r.setTitle(rs.getString("title"));
-                r.setFrom(rs.getDate("from"));
-                r.setTo(rs.getDate("to"));
-                r.setReason(rs.getString("reason"));
-                r.setStatus(rs.getInt("status"));
-                r.setCreatedBy(rs.getInt("createdby"));
-                r.setProcessedBy(rs.getInt("processedby"));
-                list.add(r);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return list;
+    } else if ("Head of Department".equalsIgnoreCase(role)) {
+        sql = """
+            SELECT r.* FROM RequestForLeave r
+            JOIN Employee e ON r.createdby = e.eid
+            WHERE e.did = (
+                SELECT did FROM Employee WHERE eid = ?
+            )
+            AND r.createdby != ?
+            AND r.status = 0
+        """;
+    } else if ("Admin".equalsIgnoreCase(role)) {
+        sql = "SELECT * FROM RequestForLeave WHERE status = 0";
     }
+
+    try (PreparedStatement ps = getConnection().prepareStatement(sql)) {
+        if (!"Admin".equalsIgnoreCase(role)) {
+            ps.setInt(1, eid);
+            ps.setInt(2, eid);
+        }
+
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            RequestForLeave r = new RequestForLeave();
+            r.setRid(rs.getInt("rid"));
+            r.setTitle(rs.getString("title"));
+            r.setFrom(rs.getDate("from"));
+            r.setTo(rs.getDate("to"));
+            r.setReason(rs.getString("reason"));
+            r.setStatus(rs.getInt("status"));
+            r.setCreatedBy(rs.getInt("createdby"));
+            r.setProcessedBy(rs.getInt("processedby"));
+            list.add(r);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return list;
+}
 
 }
